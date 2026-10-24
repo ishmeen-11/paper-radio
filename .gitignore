@@ -1,0 +1,10 @@
+.env
+.venv/
+.venv
+.data/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+node_modules/
+npm-debug.log*
