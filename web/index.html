@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A quiet workspace for reading research papers, asking questions, and following the evidence.">
+<meta name="theme-color" content="#1d3933"><title>Paper Radio — Your research, in conversation</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script>
+</head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+<symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M14 3v5h5M8 12h8M8 16h6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5C9 3 5 3 3 4v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-2-1-6-1-9 1Zm0 0v15"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 10v4M7 6v12M11 3v18M15 7v10M19 9v6M23 11v2"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z"/></symbol>
+</svg>
+<div id="app" class="app panel-closed">
+<button id="sidebarShade" class="sidebar-shade" aria-label="Close paper library" hidden></button>
+<aside class="sidebar" id="sidebar" aria-label="Paper library">
+<a href="/" class="brand" aria-label="Paper Radio home"><span class="brand-icon"><svg><use href="#i-wave"/></svg></span><span>paper radio<span class="brand-period">.</span></span></a>
+<div class="workspace-label"><span class="small-dot"></span>YOUR RESEARCH SPACE</div>
+<button class="button add-paper" data-action="upload"><svg><use href="#i-plus"/></svg>Add papers<span class="shortcut">⌘ O</span></button>
+<div class="library-heading"><h2>Your library</h2><span id="paperCount" class="count">0</span></div>
+<label class="library-search"><svg><use href="#i-search"/></svg><input id="libraryFilter" type="search" placeholder="Find a paper…" aria-label="Filter your papers"></label>
+<div id="paperList" class="paper-list"></div>
+<div class="sidebar-bottom">
+<button id="demoSide" class="demo-side"><span class="demo-icon"><svg><use href="#i-spark"/></svg></span><span>Take it for a spin<small>Explore a sample paper</small></span><svg><use href="#i-out"/></svg></button>
+<div class="local-state"><span id="healthDot" class="health-dot"></span><div><strong id="healthLabel">Connecting…</strong><small>Files stored on your computer</small></div><span class="version">v0.3</span></div>
+</div></aside>
+<div class="workspace">
+<header class="topbar">
+<div class="topbar-left"><button id="menuButton" class="icon-button mobile-menu" aria-label="Open paper library" aria-controls="sidebar" aria-expanded="false"><svg><use href="#i-menu"/></svg></button><span class="breadcrumb">Workspace<span>/</span><strong>Reading room</strong></span><span class="workspace-tag">PERSONAL</span></div>
+<div class="topbar-right"><button id="newThread" class="quiet-button" title="Start a fresh conversation"><svg><use href="#i-plus"/></svg><span>New chat</span></button><span class="topbar-divider"></span><button id="sourceToggle" class="quiet-button" aria-label="Toggle sources" aria-expanded="false" aria-controls="sourcePanel"><svg><use href="#i-panel"/></svg><span>Sources</span></button><button id="settingsButton" class="icon-button" aria-label="Settings"><svg><use href="#i-settings"/></svg></button></div>
+</header>
+<div class="desk">
+<main class="reading-area" id="main">
+<div id="conversation" class="conversation">
+<section id="welcome" class="welcome">
+<div class="welcome-top"><div class="welcome-copy"><div class="eyebrow"><span></span>LESS NOISE. MORE UNDERSTANDING.</div><h1>Let your papers<br>start a <em>conversation.</em></h1><p>A place to think with your research.<br>Ask a question, follow the evidence, and find your next idea.</p><div class="welcome-actions"><button class="button button-dark" data-action="upload"><svg><use href="#i-plus"/></svg>Add your first paper</button><button class="text-button" id="demoHero">Or try a demo<svg><use href="#i-out"/></svg></button></div></div>
+<div class="paper-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="paper-art-back"></div><div class="paper-art-sheet"><span class="art-label">THE RESEARCH NOTES</span><div class="art-title">A good question<br>changes everything.</div><div class="art-line long"></div><div class="art-line"></div><div class="art-line medium"></div><div class="art-highlight"></div><div class="art-line long"></div><div class="art-line"></div><div class="art-chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="art-footer"><span>PAPER RADIO</span><span>01 — ∞</span></div></div><div class="art-stamp"><svg><use href="#i-wave"/></svg></div><div class="art-caption">A PAPER TRAIL FOR EVERY IDEA.</div></div></div>
+<div class="starters-label">A FEW GOOD PLACES TO START</div>
+<div class="starter-grid">
+<button class="starter-card" data-question="How was the model evaluated?"><span class="starter-icon sage"><svg><use href="#i-search"/></svg></span><strong>Unpack the method</strong><span>How was the model evaluated?</span><svg class="starter-arrow"><use href="#i-out"/></svg></button>
+<button class="starter-card" data-question="What are the limitations?"><span class="starter-icon peach"><svg><use href="#i-book"/></svg></span><strong>Find the caveats</strong><span>What are the limitations?</span><svg class="starter-arrow"><use href="#i-out"/></svg></button>
+<button class="starter-card" data-question="What results does the paper report?"><span class="starter-icon lilac"><svg><use href="#i-spark"/></svg></span><strong>Follow the findings</strong><span>What results does the paper report?</span><svg class="starter-arrow"><use href="#i-out"/></svg></button>
+</div></section>
+<div id="messages" class="messages" aria-live="polite" aria-relevant="additions"></div>
+</div>
+<div class="composer-area">
+<div class="context-line"><span class="context-label"><svg><use href="#i-paper"/></svg><span id="scopeLabel">No papers selected</span></span><button id="clearSelection" class="text-button small" hidden>Clear selection</button></div>
+<form id="askForm" class="composer"><label class="sr-only" for="question">Ask a question about your selected papers</label><textarea id="question" maxlength="3000" rows="2" placeholder="What would you like to understand?"></textarea><div class="composer-toolbar"><div class="composer-tools"><button class="attach-button icon-button" type="button" data-action="upload" aria-label="Attach a PDF"><svg><use href="#i-plus"/></svg></button><span class="tool-separator"></span><select id="answerMode" aria-label="Answer mode"><option value="search">Search passages</option><option value="answer" disabled>Ask AI · setup needed</option></select><select id="retrievalMode" aria-label="Search method"><option value="lexical">Keyword search</option><option value="hybrid" disabled>Semantic + keyword</option></select></div><button id="sendButton" class="send-button" type="submit" aria-label="Ask your papers" disabled><svg><use href="#i-arrow"/></svg></button></div></form>
+<div class="composer-note"><span id="modeNote">Every question stays within your selected papers.</span><span class="enter-hint">↵ to ask · shift ↵ for a new line</span></div>
+</div></main>
+<aside id="sourcePanel" class="source-panel" aria-label="Source passages and PDF reader" hidden>
+<div class="source-heading"><div><span class="eyebrow">ON THE RECORD</span><h2>Your sources<span id="sourceCount">0</span></h2></div><button id="closeSources" class="icon-button" aria-label="Close sources"><svg><use href="#i-close"/></svg></button></div>
+<div class="source-tabs" role="tablist" aria-label="Evidence view"><button id="sourcesTab" class="active" role="tab" aria-selected="true" aria-controls="sourcesView">Passages</button><button id="paperTab" role="tab" aria-selected="false" aria-controls="paperView">Paper reader</button></div>
+<div id="sourcesView" class="sources-view" role="tabpanel" aria-labelledby="sourcesTab"><div id="sourceList"></div></div>
+<div id="paperView" class="paper-view" role="tabpanel" aria-labelledby="paperTab" hidden><div class="reader-toolbar"><div id="readerTitle" class="reader-title">No paper open</div><a id="readerExternal" class="icon-button" target="_blank" rel="noopener" aria-label="Open original PDF in a new tab"><svg><use href="#i-out"/></svg></a></div><div class="reader-pages"><button id="prevPage" class="icon-button" aria-label="Previous PDF page"><svg><use href="#i-left"/></svg></button><span id="pageLabel">PDF page —</span><button id="nextPage" class="icon-button" aria-label="Next PDF page"><svg><use href="#i-right"/></svg></button></div><iframe id="pdfFrame" title="Original research paper PDF"></iframe><div id="readerQuote" class="reader-quote" hidden></div><div id="readerEmpty" class="panel-empty"><svg><use href="#i-book"/></svg><h3>Keep the source close.</h3><p>Open a paper from your library or follow a citation to read it here.</p></div></div>
+</aside></div></div></div>
+<dialog id="uploadDialog" class="modal"><div class="modal-header"><div class="modal-mark"><svg><use href="#i-paper"/></svg></div><button class="icon-button" data-close="uploadDialog" aria-label="Close upload"><svg><use href="#i-close"/></svg></button></div><span class="eyebrow">GIVE YOUR IDEAS A SOURCE</span><h2>Add to your reading list.</h2><p>Bring a paper you’re curious about. We’ll keep the evidence within reach.</p><label id="dropzone" class="dropzone"><input id="fileInput" type="file" accept=".pdf,application/pdf" multiple><span class="upload-circle"><svg><use href="#i-upload"/></svg></span><strong>Drop your PDFs here</strong><span>or <u>choose files</u> from your computer</span><small>Text-based PDFs · up to 20 MB and 80 pages each</small></label><label class="semantic-option"><input id="semanticUpload" type="checkbox" disabled><span><strong>Enable semantic search</strong><small>Find related ideas, even when the words differ. Sends extracted text to OpenAI for indexing; API setup required.</small></span></label><div id="uploadStatus" class="upload-status" role="status" hidden></div></dialog>
+<dialog id="settingsDialog" class="modal settings-modal"><div class="modal-header"><div class="modal-mark"><svg><use href="#i-settings"/></svg></div><button class="icon-button" data-close="settingsDialog" aria-label="Close settings"><svg><use href="#i-close"/></svg></button></div><span class="eyebrow">A LITTLE HOUSEKEEPING</span><h2>Your reading room.</h2><div class="setting-row"><div><strong>Passage search</strong><p>Find text in your papers. Runs locally with no API key.</p></div><span class="status-pill">Ready</span></div><div class="setting-row"><div><strong>AI answers</strong><p id="aiSettingText">Add your OpenAI API key to .env and restart Paper Radio to enable cited answers.</p></div><span id="aiSettingStatus" class="status-pill neutral">Not set up</span></div><div class="setting-note"><svg><use href="#i-book"/></svg><p>In AI mode, your question and retrieved passages are sent to OpenAI. Semantic indexing sends extracted paper text. API usage has separate billing.</p></div><div class="setting-row"><div><strong>Reading with care</strong><p>Quotes and source IDs are checked. Always review whether the cited evidence supports the answer. Each question is independent.</p></div></div><div class="modal-footer"><span>Paper Radio · version 0.3</span><a href="/docs" target="_blank" rel="noopener">API documentation ↗</a></div></dialog>
+<div id="toastArea" class="toast-area" aria-live="polite"></div>
+<div id="dragOverlay" class="drag-overlay" hidden><svg><use href="#i-upload"/></svg><h2>A new idea starts here.</h2><p>Drop your PDFs to add them to the library.</p></div>
+</body></html>
